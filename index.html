@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Havvindloggen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F2; --surface:#FFFFFF; --ink:#13242B; --muted:#5A6B72; --line:#CBD5D8;
+  --sea:#0E5A61; --sea-soft:#D6E6E6; --signal:#C98F0A; --signal-soft:#F6E7BF;
+  --ui:"Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --read:"Literata", Georgia, "Times New Roman", serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A1E; --surface:#16252A; --ink:#E4ECEE; --muted:#93A5AB; --line:#2A3C42;
+    --sea:#6CBDBB; --sea-soft:#1D3A3D; --signal:#E8B83A; --signal-soft:#3A3117;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1A1E; --surface:#16252A; --ink:#E4ECEE; --muted:#93A5AB; --line:#2A3C42;
+  --sea:#6CBDBB; --sea-soft:#1D3A3D; --signal:#E8B83A; --signal-soft:#3A3117;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--sea)}
+img{max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 64px}
+
+/* Header */
+header.top{padding:40px 0 28px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px}
+h1{margin:0;font-weight:800;font-stretch:78%;font-size:clamp(2.4rem,6vw,4rem);line-height:.95;letter-spacing:-.01em}
+.lede{margin:10px 0 0;max-width:52ch;color:var(--muted);font-size:1.02rem}
+.stamp{font-size:.9rem;color:var(--muted);text-align:right}
+.stamp strong{color:var(--ink);font-weight:600}
+.stamp button{margin-top:6px}
+
+/* Pipeline — the signature element */
+.pipe{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px 22px 18px}
+.pipe h2,.side h2,.feed-head h2{margin:0 0 4px;font-size:1.25rem;font-weight:700;font-stretch:90%}
+.pipe .sub{margin:0 0 18px;color:var(--muted);font-size:.92rem}
+.pipe-scroll{overflow-x:auto}
+.pipe-grid{min-width:760px;display:grid;grid-template-columns:230px repeat(7,1fr);column-gap:0}
+.stage-h{font-size:.78rem;color:var(--muted);padding:0 4px 10px;line-height:1.25;border-bottom:1px solid var(--line)}
+.proj{display:contents}
+.proj .lab{padding:14px 14px 14px 0;border-bottom:1px solid var(--line)}
+.proj .lab b{display:block;font-weight:650;font-size:.98rem}
+.proj .lab span{display:block;color:var(--muted);font-size:.82rem;line-height:1.35}
+.cell{position:relative;border-bottom:1px solid var(--line);min-height:62px}
+.cell::before{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;background:var(--line)}
+.cell.done::before{background:var(--sea)}
+.cell.now::before{background:linear-gradient(90deg,var(--sea) 50%,var(--line) 50%)}
+.cell.now::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--surface);border:4px solid var(--sea)}
+.proj .next{grid-column:2 / -1;font-size:.84rem;color:var(--muted);padding:6px 0 14px;border-bottom:1px solid var(--line);margin-top:-1px;background:var(--surface)}
+.proj .next em{font-style:normal;color:var(--ink);font-weight:600}
+.proj .lab.tall{grid-row:span 2}
+
+/* Layout */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:40px;margin-top:40px;align-items:start}
+@media (max-width:900px){.cols{grid-template-columns:1fr}.stamp{text-align:left}}
+
+/* Feed */
+.feed-head{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px;font-size:.88rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.search{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin-bottom:6px}
+.count{font-size:.86rem;color:var(--muted)}
+.item{display:grid;grid-template-columns:86px minmax(0,1fr);gap:16px;padding:22px 0 20px;border-top:1px solid var(--line);position:relative}
+.item.imp3{box-shadow:inset 3px 0 0 var(--signal);padding-left:14px;margin-left:-14px}
+.item.isread .body>*:not(.acts){opacity:.55}
+.when{font-size:.84rem;color:var(--muted);line-height:1.3;padding-top:3px}
+.cat{font-size:.84rem;font-weight:600;color:var(--sea)}
+.cat .proj-tag{color:var(--muted);font-weight:400}
+.item h3{margin:2px 0 6px;font-size:1.16rem;line-height:1.3;font-weight:650;font-stretch:95%}
+.item h3 a{color:inherit;text-decoration:none}
+.item h3 a:hover{text-decoration:underline;text-decoration-color:var(--sea)}
+.summary{font-family:var(--read);font-size:1rem;line-height:1.62;margin:0;max-width:68ch}
+.why{margin:10px 0 0;font-size:.92rem;background:var(--sea-soft);border-radius:4px;padding:8px 12px;max-width:68ch}
+.why b{font-weight:650}
+.acts{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:10px;font-size:.86rem}
+.link-btn{background:none;border:0;padding:2px 0;cursor:pointer;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.link-btn:hover{color:var(--ink)}
+.link-btn[aria-pressed="true"]{color:var(--signal);font-weight:600}
+.src{color:var(--muted)}
+@media (max-width:560px){.item{grid-template-columns:1fr;gap:4px}.when{padding:0}}
+.empty{padding:28px 0;color:var(--muted);border-top:1px solid var(--line)}
+
+/* Side */
+.side section{margin-bottom:36px}
+.ms{list-style:none;margin:10px 0 0;padding:0;border-left:2px solid var(--line)}
+.ms li{position:relative;padding:0 0 16px 18px}
+.ms li::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--sea)}
+.ms .t{font-size:.82rem;font-weight:650;color:var(--sea)}
+.ms .w{font-size:.93rem;line-height:1.4}
+.srcs{list-style:none;margin:10px 0 0;padding:0}
+.srcs li{padding:8px 0;border-top:1px solid var(--line);font-size:.92rem}
+.srcs li span{display:block;color:var(--muted);font-size:.82rem}
+
+/* Briefing */
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px}
+.brief p.d{margin:4px 0 12px;color:var(--muted);font-size:.9rem}
+.btn{border:1px solid var(--sea);background:var(--sea);color:var(--surface);border-radius:5px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:.92rem}
+.btn.ghost{background:transparent;color:var(--sea)}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ask{flex:1;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:5px;background:var(--bg)}
+.out{margin-top:14px;font-family:var(--read);font-size:.95rem;line-height:1.6}
+.out h4{font-family:var(--ui);font-size:.95rem;margin:14px 0 4px}
+.out ul{margin:4px 0;padding-left:18px}
+.out p{margin:6px 0}
+.note{font-size:.84rem;color:var(--muted);margin-top:8px}
+
+/* Add form */
+details.add{margin-top:28px;border-top:1px solid var(--line);padding-top:14px}
+details.add summary{cursor:pointer;font-weight:600;color:var(--sea)}
+.form{display:grid;gap:10px;margin-top:12px;max-width:560px}
+.form label{font-size:.85rem;color:var(--muted);display:grid;gap:4px}
+.form input,.form select,.form textarea{padding:8px 10px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:5px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.copybox{font-size:.88rem;background:var(--sea-soft);border-radius:4px;padding:8px 10px;margin-top:8px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Havvindloggen</h1>
+      <p class="lede">Norsk havvind samlet på ett sted: politikk, prosjekter, kontrakter og selskaper, med en tanke om hva det betyr for deg som vil inn i bransjen.</p>
+    </div>
+    <div class="stamp" id="stamp">Laster …</div>
+  </header>
+
+  <section class="pipe" aria-labelledby="pipe-h">
+    <h2 id="pipe-h">Hvor prosjektene står</h2>
+    <p class="sub">Fra utredning til drift. Prikken viser fasen prosjektet er i nå.</p>
+    <div class="pipe-scroll"><div class="pipe-grid" id="pipe"></div></div>
+  </section>
+
+  <div class="cols">
+    <main>
+      <div class="feed-head">
+        <h2>Siste utvikling</h2>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filtrer saker"></div>
+      <input class="search" id="q" type="search" placeholder="Søk i saker, f.eks. Equinor eller Utsira" aria-label="Søk i saker">
+      <div id="feed"></div>
+
+      <details class="add" id="addbox">
+        <summary>Legg til en sak du har funnet selv</summary>
+        <p class="note">Egne saker lagres i denne nettleseren.</p>
+        <form class="form" id="addform">
+          <label>Tittel<input name="title" required maxlength="200"></label>
+          <label>Lenke<input name="url" type="url" placeholder="https://"></label>
+          <div class="two">
+            <label>Kategori<select name="category"></select></label>
+            <label>Dato<input name="date" type="date" required></label>
+          </div>
+          <label>Kort oppsummering<textarea name="summary" rows="3" maxlength="800"></textarea></label>
+          <div><button class="btn" type="submit">Lagre saken</button></div>
+        </form>
+      </details>
+    </main>
+
+    <aside class="side">
+
+      <section>
+        <h2>Kommende milepæler</h2>
+        <ul class="ms" id="ms"></ul>
+      </section>
+
+      <section>
+        <h2>Kilder å følge</h2>
+        <ul class="srcs">
+          <li><a href="https://www.regjeringen.no/no/tema/energi/vindkraft-til-havs/id2873850/" target="_blank" rel="noopener">Regjeringen: Vindkraft til havs</a><span>Pressemeldinger, utlysninger og tidslinje</span></li>
+          <li><a href="https://www.nve.no/energi/energisystem/havvind/" target="_blank" rel="noopener">NVE: Havvind</a><span>Konsekvensutredninger og konsesjoner</span></li>
+          <li><a href="https://www.enova.no" target="_blank" rel="noopener">Enova</a><span>Forvalter støtten til flytende havvind</span></li>
+          <li><a href="https://www.statnett.no" target="_blank" rel="noopener">Statnett</a><span>Nettilknytning og kraftsystem</span></li>
+          <li><a href="https://www.fornybarnorge.no" target="_blank" rel="noopener">Fornybar Norge</a><span>Bransjens syn og høringssvar</span></li>
+          <li><a href="https://www.offshorenorge.no" target="_blank" rel="noopener">Offshore Norge</a><span>Leverandør- og operatørsiden</span></li>
+          <li><a href="https://www.norwep.com" target="_blank" rel="noopener">NORWEP</a><span>Norske leverandører i eksportmarkedet</span></li>
+          <li><a href="https://www.ocean24.no" target="_blank" rel="noopener">Ocean24</a><span>Kontrakter og havnæring, daglig</span></li>
+          <li><a href="https://www.offshorewind.biz" target="_blank" rel="noopener">offshoreWIND.biz</a><span>Internasjonale nyheter og kontrakter</span></li>
+          <li><a href="https://e24.no/energi-og-klima" target="_blank" rel="noopener">E24 Energi og klima</a><span>Økonomi og politikk</span></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script id="havvind-data" type="application/json">
+{
+ "news": [
+  {
+   "id": "2026-10-10-ap-frp-rosenberg",
+   "category": "politikk",
+   "date": "2026-10-10",
+   "importance": 2,
+   "source": "Nettavisen",
+   "title": "Ap og Frp i strid om havvindsubsidier og jobber i leverandørindustrien",
+   "url": "https://www.nettavisen.no/okonomi/ap-tordner-mot-frp-skremmende-at-de-vil-ramme-rosenberg-verft/s/80-95-145484",
+   "summary": "Frp knytter tapte arbeidsplasser i leverandør- og oljeindustrien på Vestlandet til regjeringens grønne subsidier, og sier partiet ikke er imot havvind, men imot støtten. Ap svarer at Frps linje kan ramme verft som Rosenberg og sammenligner havvind med oppbyggingen av oljenæringen.",
+   "why": "Havvindsubsidier blir et tema i valgkampen fram mot 2029. Følg partienes linjer, de avgjør hvor mange prosjekter som faktisk blir bygget i Norge."
+  },
+  {
+   "id": "2026-10-09-hoyre-utsira",
+   "category": "politikk",
+   "date": "2026-10-09",
+   "importance": 3,
+   "project": "Utsira Nord",
+   "source": "Aftenposten / NTB",
+   "title": "Høyre gir klarsignal til flytende havvind på Utsira Nord",
+   "url": "https://www.aftenposten.no/norge/politikk/i/QggO6A/hoeyre-gir-klarsignal-til-flytende-havvind-vil-bidra-til-framdrift-for-utsira-nord",
+   "summary": "Etter den eksterne kvalitetssikringen sier Høyre at partiet fortsatt støtter Utsira Nord og vil bidra til framdrift. Dermed ser det ut til at det politiske flertallet bak støtteprogrammet på opptil 35 milliarder kroner holder. Offshore Norge, Norsk Industri og Fornybar Norge ønsket avklaringen velkommen, mens Frp fortsatt er kritisk.",
+   "why": "Politisk ro rundt Norges eneste store flytende havvindprosjekt gjør det tryggere for leverandører å bygge opp kompetanse og ansette."
+  },
+  {
+   "id": "2026-10-07-utsira-vurderinger",
+   "category": "politikk",
+   "date": "2026-10-07",
+   "importance": 3,
+   "project": "Utsira Nord",
+   "source": "Regjeringen",
+   "title": "Regjeringen legger fram eksterne vurderinger av Utsira Nord i statsbudsjettet",
+   "url": "https://www.regjeringen.no/no/aktuelt/eksterne-vurderinger-av-utsira-nord-er-gjennomfort/id3174248/",
+   "summary": "Som svar på Stortingets krav fra juni har regjeringen fått vurdert teknologiutvikling, ringvirkninger og statens risiko. Ifølge beregningene kan en utbygging på 500 MW gi rundt 2 TWh i året og senke strømprisen i Sørvest-Norge med om lag 3 øre per kWh i 2035. NVEs scenariorapport for kraftmarkedet kommer i oktober.",
+   "why": "Dokumentene er gode å lese for å forstå hvordan staten tenker om kost, nytte og risiko i havvind. Det er nyttig i intervjuer."
+  },
+  {
+   "id": "2026-10-07-ringvirkninger",
+   "category": "marked",
+   "date": "2026-10-07",
+   "importance": 3,
+   "project": "Utsira Nord",
+   "source": "Oslo Economics (rapport, PDF)",
+   "title": "Ringvirkningsanalyse: Utsira Nord kan gi rundt 6000 årsverk",
+   "url": "https://www.regjeringen.no/contentassets/5bb53b34aa0b4e09b93cf8b782d661b5/oslo-economics-ringvirkningsanalyse-av-utsira-nord.pdf",
+   "summary": "Oslo Economics har på oppdrag fra Energidepartementet anslått at prosjektet kan gi om lag 8,5 milliarder kroner i norsk verdiskaping og rundt 6000 årsverk. Høyre forventer at regjeringen og utbyggerne sikrer høy norsk andel i kontraktene.",
+   "why": "Dette er det beste anslaget på hvor mange jobber det første flytende prosjektet kan skape. Rapporten viser også hvilke deler av verdikjeden jobbene havner i."
+  },
+  {
+   "id": "2026-08-21-snii-utsatt",
+   "category": "prosjekter",
+   "date": "2026-08-21",
+   "importance": 3,
+   "project": "Sørlige Nordsjø II",
+   "source": "Regjeringen",
+   "title": "Ventyr får ett års utsettelse for Sørlige Nordsjø II",
+   "url": "https://www.regjeringen.no/no/aktuelt/utsatt-frist-for-konsesjonssoknad-til-sorlige-nordsjo-ii/id3171048/",
+   "summary": "Energidepartementet har gitt Ventyr (JERA Nex bp og Ingka Investments) 12 måneders forlengelse, og ny frist for konsesjonssøknad er 15. oktober 2027. Selskapet vil utrede en alternativ ilandføring og nettilknytning ved Alcoas anlegg på Lista. Ventyr har også pekt på uventede utfordringer og krevende økonomiske forhold i havvindmarkedet.",
+   "why": "Norges første kommersielle havvindpark blir forsinket. Byggefasen, og dermed de fleste jobbene, skyves trolig ut i tid."
+  },
+  {
+   "id": "2026-06-24-plan-innspill",
+   "category": "politikk",
+   "date": "2026-06-24",
+   "importance": 2,
+   "source": "Innspill fra arbeidstakerorganisasjoner (PDF)",
+   "title": "Bransjen venter på regjeringens plan for videre havvindutbygging",
+   "url": "https://styrke.no/protected-download/131909/",
+   "summary": "Regjeringen har lovet en plan for veien videre for havvind i løpet av 2026, med jevnlige utlysninger og støttekonkurranser i en oppstartsfase. Flere organisasjoner har sendt innspill og ber om en tydelig tidslinje, slik at både utbyggere og leverandører kan planlegge.",
+   "why": "Planen blir det viktigste dokumentet å lese når den kommer. Den avgjør hvor mange prosjekter og jobber Norge får etter 2030."
+  },
+  {
+   "id": "2026-06-09-kvalitetssikring",
+   "category": "politikk",
+   "date": "2026-06-09",
+   "importance": 2,
+   "project": "Utsira Nord",
+   "source": "iNyheter / NTB",
+   "title": "Stortinget krever ekstern kvalitetssikring av Utsira Nord",
+   "url": "https://inyheter.no/09/10/2026/hoyre-gir-gront-lys-til-havvindprosjekt-med-stotteramme-pa-35-milliarder-kroner/",
+   "summary": "Høyre, Frp, KrF og Rødt sikret flertall for at staten ikke kan inngå økonomiske forpliktelser før prosjektet har fått en ekstern kvalitetssikring og samfunnsøkonomisk analyse. Vurderingene ble lagt fram med statsbudsjettet i oktober.",
+   "why": "Viser at støtten til havvind ikke er gitt. Politisk risiko er en viktig del av bildet når du vurderer arbeidsgivere."
+  },
+  {
+   "id": "2026-03-27-equinor-melding",
+   "category": "selskaper",
+   "date": "2026-03-27",
+   "importance": 2,
+   "project": "Utsira Nord",
+   "source": "Equinor",
+   "title": "Equinor og Vårgrønn starter konsesjonsprosessen for Utsira Nord",
+   "url": "https://web-equinor-web-sites-prod.c2.radix.equinor.com/energy/utsira-nord",
+   "summary": "Utsira Nord Havvind DA, eid av Equinor (65 %) og Vårgrønn (35 %), har sendt melding til NVE for prosjektområde 3. Planen er rundt 500 MW med Equinors Hywind-konsept, som på Hywind Tampen. Endelig utredningsprogram ventes høsten 2026, og oppstart er anslått rundt 2035.",
+   "why": "Equinor og Vårgrønn er sentrale arbeidsgivere å følge. Hywind-teknologien er en norsk styrke innen flytende havvind."
+  },
+  {
+   "id": "2026-02-13-utsira-tildelt",
+   "category": "kontrakter",
+   "date": "2026-02-13",
+   "importance": 3,
+   "project": "Utsira Nord",
+   "source": "NVE (høringsbrev)",
+   "title": "Utsira Nord formelt tildelt to konsortier",
+   "url": "https://webfileservice.nve.no/API/PublishedFiles/Download/f2000580-a151-44e1-a3ca-adb9c04e7b69/202609965/3451877",
+   "summary": "Energidepartementet tildelte prosjektområde 3 til Equinor og Vårgrønn og prosjektområde 2 til Harald Hårfagre AS, som eies av Deep Wind Offshore og EDF Renewables. Det tredje området ble ikke tildelt, fordi det bare kom to søkere. Begge har to år på seg til å søke konsesjon før det holdes en støttekonkurranse om hvem som faktisk får bygge.",
+   "why": "Bare ett av de to prosjektene får støtte. Følg begge, siden vinneren blir den store innkjøperen av norske leveranser utover 2030-tallet."
+  },
+  {
+   "id": "2026-01-26-nordsjoavtale",
+   "category": "politikk",
+   "date": "2026-01-26",
+   "importance": 2,
+   "source": "Dagbladet Børsen / Reuters",
+   "title": "Norge med i Nordsjø-avtale om 100 GW havvind",
+   "url": "https://borsen.dagbladet.no/nyheter/norge-inngar-gigantavtale/84144367",
+   "summary": "Ti land rundt Nordsjøen, blant dem Norge, Danmark og Storbritannia, ble enige om et mål om 100 GW havvind gjennom felles prosjekter. Avtalen ble undertegnet på et toppmøte i Hamburg og begrunnes med energisikkerhet. Til sammenligning hadde Norge rundt 40 GW installert kraftkapasitet totalt.",
+   "why": "Markedet er hele Nordsjøen, ikke bare Norge. Norsk kompetanse kan brukes på prosjekter i Danmark, Tyskland og Storbritannia."
+  },
+  {
+   "id": "2026-01-23-leverandorkraft",
+   "category": "marked",
+   "date": "2026-01-23",
+   "importance": 2,
+   "source": "Næringsforeningen i Stavanger-regionen",
+   "title": "Norsk leverandørindustri omsetter for 60 milliarder i havvind",
+   "url": "https://www.naeringsforeningen.no/nyheter/-samme-hva-som-skjer-i-norge-s%C3%A5-blir-dette-kjempestort-i-europa",
+   "summary": "Rapporten LeverandørKRAFT viser at norske leverandører omsatte for rundt 60 milliarder kroner innen havvind, en dobling siden 2021. Mye av omsetningen kommer fra prosjekter i utlandet. Bransjen beskriver tyngre tider med færre prosjekter, men venter stor vekst i Europa uansett hva som skjer i Norge.",
+   "why": "Jobbene finnes allerede, mest i leverandørselskaper som jobber mot utenlandske prosjekter. Du trenger ikke vente på norske parker for å komme inn."
+  },
+  {
+   "id": "2025-06-11-norconsult-snii",
+   "category": "kontrakter",
+   "date": "2025-06-11",
+   "importance": 1,
+   "project": "Sørlige Nordsjø II",
+   "source": "Norconsult",
+   "title": "Norconsult skal prosjektere landnettet for Sørlige Nordsjø II",
+   "url": "https://investor.norconsult.com/stock-exchange-and-press-releases/ventyr-chose-norconsult-one-step-closer-to-realising-soerlige-nordsjoe-ii-offshore-wind-project/",
+   "summary": "Ventyr valgte Norconsult til å designe og planlegge nettilknytningen på land (FEED). Norconsult har tidligere gjort miljøkonsekvensutredningen på land og nær land for prosjektet. Worley Rosenberg er valgt som foretrukket leverandør av den havbaserte transformatorstasjonen.",
+   "why": "Rådgivende ingeniørselskaper er en vanlig inngang til bransjen tidlig i prosjektene. Det gjelder særlig innen elkraft, nett og miljø."
+  }
+ ],
+ "projects": [
+  {
+   "name": "Hywind Tampen",
+   "owner": "Equinor og partnere",
+   "capacity": "Flytende, forsyner olje- og gassfelt",
+   "stage": 6,
+   "next": "I drift siden 2023. Verdens største flytende havvindpark da den åpnet, og en referanse for Utsira Nord."
+  },
+  {
+   "name": "Sørlige Nordsjø II",
+   "owner": "Ventyr (JERA Nex bp, Ingka Investments)",
+   "capacity": "1,5 GW bunnfast",
+   "stage": 3,
+   "next": "Konsesjonssøknad innen 15. oktober 2027. Utreder ny ilandføring ved Lista."
+  },
+  {
+   "name": "Utsira Nord, område 3",
+   "owner": "Equinor og Vårgrønn",
+   "capacity": "Om lag 500 MW flytende",
+   "stage": 3,
+   "next": "Utredningsprogram fra NVE høsten 2026, deretter konsesjonssøknad og støttekonkurranse."
+  },
+  {
+   "name": "Utsira Nord, område 2",
+   "owner": "Harald Hårfagre (Deep Wind Offshore, EDF)",
+   "capacity": "Om lag 500 MW flytende",
+   "stage": 3,
+   "next": "Konkurrerer med område 3 om støtten. Bare ett av prosjektene får inntil 35 mrd. kr."
+  },
+  {
+   "name": "Nye havvindområder",
+   "owner": "Staten (NVE utreder 20 områder)",
+   "capacity": "Mål: 30 GW tildelt innen 2040",
+   "stage": 0,
+   "next": "Regjeringens plan for utlysninger ventes i løpet av 2026."
+  }
+ ],
+ "meta": {
+  "lastUpdated": "2026-10-10",
+  "milestones": [
+   {
+    "sort": "2026-10",
+    "when": "Oktober 2026",
+    "what": "NVEs scenariorapport for kraftmarkedet, med beregninger av havvindens rolle"
+   },
+   {
+    "sort": "2026-11",
+    "when": "Høsten 2026",
+    "what": "NVE fastsetter utredningsprogram for de to Utsira Nord-prosjektene"
+   },
+   {
+    "sort": "2026-12",
+    "when": "Innen utgangen av 2026",
+    "what": "Regjeringens plan for videre utlysninger av havvind"
+   },
+   {
+    "sort": "2027-10",
+    "when": "15. oktober 2027",
+    "what": "Frist for konsesjonssøknad for Sørlige Nordsjø II"
+   },
+   {
+    "sort": "2028-02",
+    "when": "Rundt februar 2028",
+    "what": "Frist for konsesjonssøknader i Utsira Nord, to år etter tildeling"
+   },
+   {
+    "sort": "2028-06",
+    "when": "2028–2029",
+    "what": "Støttekonkurranse i Utsira Nord avgjør hvem som bygger"
+   },
+   {
+    "sort": "2035-01",
+    "when": "Rundt 2035",
+    "what": "Planlagt drift for det første flytende prosjektet i Utsira Nord"
+   }
+  ]
+ }
+}
+</script>
+<script>
+(function(){
+  const CATS = {politikk:"Politikk", prosjekter:"Prosjekter", selskaper:"Selskaper", kontrakter:"Kontrakter", marked:"Marked og jobb"};
+  const STAGES = ["Utredes","Område åpnet","Areal tildelt","Utredning og konsesjon","Støtte og investering","Bygging","Drift"];
+  let DATA = JSON.parse(document.getElementById("havvind-data").textContent);
+  const KEY = "havvindloggen:v1";
+  const S = {news:[], projects:DATA.projects, meta:DATA.meta, read:new Set(), starred:new Set(), own:[], filter:"alle", q:""};
+  const $ = id => document.getElementById(id);
+
+  function load(){
+    try{ const raw = localStorage.getItem(KEY); if(!raw) return; const d = JSON.parse(raw);
+      S.read = new Set(d.read||[]); S.starred = new Set(d.starred||[]); S.own = Array.isArray(d.own) ? d.own : [];
+    }catch{}
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify({read:[...S.read], starred:[...S.starred], own:S.own})); }
+    catch{ toast("Nettleseren lar ikke siden lagre. Endringene forsvinner når du lukker siden."); }
+  }
+  function merge(){
+    S.news = [...DATA.news, ...S.own].sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  }
+  function h(tag, attrs, ...kids){
+    const el = document.createElement(tag);
+    if (attrs) for (const [k,v] of Object.entries(attrs)){
+      if (v == null || v === false) continue;
+      if (k === "class") el.className = v;
+      else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? "" : v);
+    }
+    for (const k of kids.flat()){ if (k == null || k === false) continue; el.append(k instanceof Node ? k : document.createTextNode(String(k))); }
+    return el;
+  }
+  const fmt = new Intl.DateTimeFormat("nb-NO",{day:"numeric",month:"short",year:"numeric"});
+  function fmtDate(s){ if(!s) return ""; const d = new Date(s+"T12:00:00"); return isNaN(d) ? s : fmt.format(d); }
+  function safeUrl(u){ try{ const x = new URL(u); return (x.protocol==="https:"||x.protocol==="http:") ? x.href : null; }catch{ return null; } }
+  function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("on"),2400); }
+
+  function renderPipe(){
+    const g = $("pipe"); g.replaceChildren();
+    g.append(h("div",{class:"stage-h"},"Prosjekt"));
+    STAGES.forEach(s => g.append(h("div",{class:"stage-h"},s)));
+    for (const p of S.projects){
+      const stage = Math.max(0, Math.min(STAGES.length-1, Number(p.stage)||0));
+      const row = h("div",{class:"proj"});
+      row.append(h("div",{class:"lab tall"}, h("b",null,p.name||""), h("span",null,p.owner||""), p.capacity ? h("span",null,p.capacity) : null));
+      STAGES.forEach((_,i)=> row.append(h("div",{class:"cell"+(i<stage?" done":"")+(i===stage?" now":""),"aria-hidden":"true"})));
+      row.append(h("div",{class:"next"}, "Nå: "+STAGES[stage]+". ", p.next ? [h("em",null,"Neste: "), p.next] : ""));
+      g.append(row);
+    }
+  }
+  function renderFilters(){
+    const f = $("filters"); f.replaceChildren();
+    const opts = [["alle","Alle"],...Object.entries(CATS),["stjerne","Stjernemerket"],["ulest","Uleste"]];
+    for (const [k,label] of opts){
+      f.append(h("button",{class:"chip",type:"button","aria-pressed":String(S.filter===k),onclick:()=>{S.filter=k;renderFilters();renderFeed();}},label));
+    }
+  }
+  function visible(){
+    const q = S.q.trim().toLowerCase();
+    return S.news.filter(n=>{
+      if (S.filter==="stjerne" && !S.starred.has(n.id)) return false;
+      if (S.filter==="ulest" && S.read.has(n.id)) return false;
+      if (CATS[S.filter] && n.category!==S.filter) return false;
+      if (q){ const hay=[n.title,n.summary,n.source,n.project,n.why].join(" ").toLowerCase(); if(!hay.includes(q)) return false; }
+      return true;
+    });
+  }
+  function renderFeed(){
+    const feed = $("feed"); feed.replaceChildren();
+    const list = visible();
+    const unread = S.news.filter(n=>!S.read.has(n.id)).length;
+    $("count").textContent = `${S.news.length} saker, ${unread} uleste`;
+    if (!list.length){ feed.append(h("p",{class:"empty"},"Ingen saker passer filteret. Velg «Alle» eller tøm søket.")); return; }
+    for (const n of list){
+      const isRead = S.read.has(n.id), isStar = S.starred.has(n.id);
+      const url = safeUrl(n.url);
+      const title = url ? h("a",{href:url,target:"_blank",rel:"noopener"},n.title||"") : (n.title||"");
+      const acts = h("div",{class:"acts"},
+        h("button",{class:"link-btn",type:"button","aria-pressed":String(isStar),onclick:()=>toggle(S.starred,n.id)}, isStar?"★ Stjernemerket":"☆ Stjernemerk"),
+        h("button",{class:"link-btn",type:"button",onclick:()=>toggle(S.read,n.id)}, isRead?"Merk som ulest":"Merk som lest"),
+        n.source ? h("span",{class:"src"}, "Kilde: ", url ? h("a",{href:url,target:"_blank",rel:"noopener"},n.source) : n.source) : null,
+        n.addedBy==="meg" ? h("button",{class:"link-btn",type:"button",onclick:()=>removeItem(n)},"Slett") : null
+      );
+      feed.append(h("article",{class:"item"+(n.importance>=3?" imp3":"")+(isRead?" isread":"")},
+        h("div",{class:"when"}, fmtDate(n.date), n.importance>=3 ? h("div",{style:"color:var(--signal);font-weight:650;margin-top:2px"},"Viktig") : null),
+        h("div",{class:"body"},
+          h("div",{class:"cat"}, CATS[n.category]||n.category||"", n.project ? h("span",{class:"proj-tag"}," i "+n.project) : null),
+          h("h3",null,title),
+          n.summary ? h("p",{class:"summary"},n.summary) : null,
+          n.why ? h("p",{class:"why"}, h("b",null,"For deg: "), n.why) : null,
+          acts)
+      ));
+    }
+  }
+  function toggle(set,id){ if (set.has(id)) set.delete(id); else set.add(id); save(); renderFeed(); }
+  function removeItem(n){
+    if (!confirm("Slette «"+(n.title||"")+"»?")) return;
+    S.own = S.own.filter(x=>x.id!==n.id); save(); merge(); renderFeed(); toast("Saken er slettet");
+  }
+  function renderMeta(){
+    const m = S.meta || {};
+    const st = $("stamp"); st.replaceChildren();
+    st.append(h("div",null,"Sist oppdatert ", h("strong",null, m.lastUpdated ? fmtDate(m.lastUpdated) : "ukjent")));
+    st.append(h("div",null,h("button",{class:"link-btn",type:"button",onclick:exportOwn},"Last ned mine egne saker")));
+    const ms = $("ms"); ms.replaceChildren();
+    const items = Array.isArray(m.milestones) ? [...m.milestones].sort((a,b)=>String(a.sort||"").localeCompare(String(b.sort||""))) : [];
+    for (const it of items) ms.append(h("li",null,h("div",{class:"t"},it.when||""),h("div",{class:"w"},it.what||"")));
+  }
+  function exportOwn(){
+    if (!S.own.length){ toast("Du har ikke lagt til egne saker ennå"); return; }
+    const blob = new Blob([JSON.stringify(S.own,null,2)],{type:"application/json"});
+    const a = h("a",{href:URL.createObjectURL(blob),download:"havvindloggen-egne-saker.json"});
+    document.body.append(a); a.click(); a.remove();
+  }
+  function setupForm(){
+    const form = $("addform"), sel = form.elements.category;
+    for (const [k,v] of Object.entries(CATS)) sel.append(h("option",{value:k},v));
+    form.elements.date.value = new Date().toISOString().slice(0,10);
+    form.addEventListener("submit", e=>{
+      e.preventDefault();
+      const f = form.elements;
+      const doc = {id:"egen-"+Date.now(), title:f.title.value.trim(), url:safeUrl(f.url.value.trim())||"", category:f.category.value, date:f.date.value, summary:f.summary.value.trim(), source:"Lagt til av deg", addedBy:"meg", importance:1};
+      if (!doc.title) return;
+      S.own.push(doc); save(); merge(); renderFeed();
+      form.reset(); f.date.value = new Date().toISOString().slice(0,10);
+      toast("Saken er lagret i denne nettleseren");
+    });
+  }
+
+  $("q").addEventListener("input", e=>{ S.q = e.target.value; renderFeed(); });
+  async function boot(){
+    load();
+    try{
+      const r = await fetch("news.json", {cache:"no-store"});
+      if (r.ok){ const j = await r.json(); if (j && Array.isArray(j.news)) DATA = j; }
+    }catch{ /* åpnet lokalt som fil: bruk innebygd kopi */ }
+    S.projects = DATA.projects || []; S.meta = DATA.meta || {};
+    merge();
+    renderFilters(); renderPipe(); renderFeed(); renderMeta(); setupForm();
+  }
+  boot();
+})();
+</script>
+</body>
+</html>

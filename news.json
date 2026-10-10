@@ -1,0 +1,221 @@
+{
+  "news": [
+    {
+      "id": "2026-10-10-ap-frp-rosenberg",
+      "category": "politikk",
+      "date": "2026-10-10",
+      "importance": 2,
+      "source": "Nettavisen",
+      "title": "Ap og Frp i strid om havvindsubsidier og jobber i leverandørindustrien",
+      "url": "https://www.nettavisen.no/okonomi/ap-tordner-mot-frp-skremmende-at-de-vil-ramme-rosenberg-verft/s/80-95-145484",
+      "summary": "Frp knytter tapte arbeidsplasser i leverandør- og oljeindustrien på Vestlandet til regjeringens grønne subsidier, og sier partiet ikke er imot havvind, men imot støtten. Ap svarer at Frps linje kan ramme verft som Rosenberg og sammenligner havvind med oppbyggingen av oljenæringen.",
+      "why": "Havvindsubsidier blir et tema i valgkampen fram mot 2029. Følg partienes linjer, de avgjør hvor mange prosjekter som faktisk blir bygget i Norge."
+    },
+    {
+      "id": "2026-10-09-hoyre-utsira",
+      "category": "politikk",
+      "date": "2026-10-09",
+      "importance": 3,
+      "project": "Utsira Nord",
+      "source": "Aftenposten / NTB",
+      "title": "Høyre gir klarsignal til flytende havvind på Utsira Nord",
+      "url": "https://www.aftenposten.no/norge/politikk/i/QggO6A/hoeyre-gir-klarsignal-til-flytende-havvind-vil-bidra-til-framdrift-for-utsira-nord",
+      "summary": "Etter den eksterne kvalitetssikringen sier Høyre at partiet fortsatt støtter Utsira Nord og vil bidra til framdrift. Dermed ser det ut til at det politiske flertallet bak støtteprogrammet på opptil 35 milliarder kroner holder. Offshore Norge, Norsk Industri og Fornybar Norge ønsket avklaringen velkommen, mens Frp fortsatt er kritisk.",
+      "why": "Politisk ro rundt Norges eneste store flytende havvindprosjekt gjør det tryggere for leverandører å bygge opp kompetanse og ansette."
+    },
+    {
+      "id": "2026-10-07-utsira-vurderinger",
+      "category": "politikk",
+      "date": "2026-10-07",
+      "importance": 3,
+      "project": "Utsira Nord",
+      "source": "Regjeringen",
+      "title": "Regjeringen legger fram eksterne vurderinger av Utsira Nord i statsbudsjettet",
+      "url": "https://www.regjeringen.no/no/aktuelt/eksterne-vurderinger-av-utsira-nord-er-gjennomfort/id3174248/",
+      "summary": "Som svar på Stortingets krav fra juni har regjeringen fått vurdert teknologiutvikling, ringvirkninger og statens risiko. Ifølge beregningene kan en utbygging på 500 MW gi rundt 2 TWh i året og senke strømprisen i Sørvest-Norge med om lag 3 øre per kWh i 2035. NVEs scenariorapport for kraftmarkedet kommer i oktober.",
+      "why": "Dokumentene er gode å lese for å forstå hvordan staten tenker om kost, nytte og risiko i havvind. Det er nyttig i intervjuer."
+    },
+    {
+      "id": "2026-10-07-ringvirkninger",
+      "category": "marked",
+      "date": "2026-10-07",
+      "importance": 3,
+      "project": "Utsira Nord",
+      "source": "Oslo Economics (rapport, PDF)",
+      "title": "Ringvirkningsanalyse: Utsira Nord kan gi rundt 6000 årsverk",
+      "url": "https://www.regjeringen.no/contentassets/5bb53b34aa0b4e09b93cf8b782d661b5/oslo-economics-ringvirkningsanalyse-av-utsira-nord.pdf",
+      "summary": "Oslo Economics har på oppdrag fra Energidepartementet anslått at prosjektet kan gi om lag 8,5 milliarder kroner i norsk verdiskaping og rundt 6000 årsverk. Høyre forventer at regjeringen og utbyggerne sikrer høy norsk andel i kontraktene.",
+      "why": "Dette er det beste anslaget på hvor mange jobber det første flytende prosjektet kan skape. Rapporten viser også hvilke deler av verdikjeden jobbene havner i."
+    },
+    {
+      "id": "2026-08-21-snii-utsatt",
+      "category": "prosjekter",
+      "date": "2026-08-21",
+      "importance": 3,
+      "project": "Sørlige Nordsjø II",
+      "source": "Regjeringen",
+      "title": "Ventyr får ett års utsettelse for Sørlige Nordsjø II",
+      "url": "https://www.regjeringen.no/no/aktuelt/utsatt-frist-for-konsesjonssoknad-til-sorlige-nordsjo-ii/id3171048/",
+      "summary": "Energidepartementet har gitt Ventyr (JERA Nex bp og Ingka Investments) 12 måneders forlengelse, og ny frist for konsesjonssøknad er 15. oktober 2027. Selskapet vil utrede en alternativ ilandføring og nettilknytning ved Alcoas anlegg på Lista. Ventyr har også pekt på uventede utfordringer og krevende økonomiske forhold i havvindmarkedet.",
+      "why": "Norges første kommersielle havvindpark blir forsinket. Byggefasen, og dermed de fleste jobbene, skyves trolig ut i tid."
+    },
+    {
+      "id": "2026-06-24-plan-innspill",
+      "category": "politikk",
+      "date": "2026-06-24",
+      "importance": 2,
+      "source": "Innspill fra arbeidstakerorganisasjoner (PDF)",
+      "title": "Bransjen venter på regjeringens plan for videre havvindutbygging",
+      "url": "https://styrke.no/protected-download/131909/",
+      "summary": "Regjeringen har lovet en plan for veien videre for havvind i løpet av 2026, med jevnlige utlysninger og støttekonkurranser i en oppstartsfase. Flere organisasjoner har sendt innspill og ber om en tydelig tidslinje, slik at både utbyggere og leverandører kan planlegge.",
+      "why": "Planen blir det viktigste dokumentet å lese når den kommer. Den avgjør hvor mange prosjekter og jobber Norge får etter 2030."
+    },
+    {
+      "id": "2026-06-09-kvalitetssikring",
+      "category": "politikk",
+      "date": "2026-06-09",
+      "importance": 2,
+      "project": "Utsira Nord",
+      "source": "iNyheter / NTB",
+      "title": "Stortinget krever ekstern kvalitetssikring av Utsira Nord",
+      "url": "https://inyheter.no/09/10/2026/hoyre-gir-gront-lys-til-havvindprosjekt-med-stotteramme-pa-35-milliarder-kroner/",
+      "summary": "Høyre, Frp, KrF og Rødt sikret flertall for at staten ikke kan inngå økonomiske forpliktelser før prosjektet har fått en ekstern kvalitetssikring og samfunnsøkonomisk analyse. Vurderingene ble lagt fram med statsbudsjettet i oktober.",
+      "why": "Viser at støtten til havvind ikke er gitt. Politisk risiko er en viktig del av bildet når du vurderer arbeidsgivere."
+    },
+    {
+      "id": "2026-03-27-equinor-melding",
+      "category": "selskaper",
+      "date": "2026-03-27",
+      "importance": 2,
+      "project": "Utsira Nord",
+      "source": "Equinor",
+      "title": "Equinor og Vårgrønn starter konsesjonsprosessen for Utsira Nord",
+      "url": "https://web-equinor-web-sites-prod.c2.radix.equinor.com/energy/utsira-nord",
+      "summary": "Utsira Nord Havvind DA, eid av Equinor (65 %) og Vårgrønn (35 %), har sendt melding til NVE for prosjektområde 3. Planen er rundt 500 MW med Equinors Hywind-konsept, som på Hywind Tampen. Endelig utredningsprogram ventes høsten 2026, og oppstart er anslått rundt 2035.",
+      "why": "Equinor og Vårgrønn er sentrale arbeidsgivere å følge. Hywind-teknologien er en norsk styrke innen flytende havvind."
+    },
+    {
+      "id": "2026-02-13-utsira-tildelt",
+      "category": "kontrakter",
+      "date": "2026-02-13",
+      "importance": 3,
+      "project": "Utsira Nord",
+      "source": "NVE (høringsbrev)",
+      "title": "Utsira Nord formelt tildelt to konsortier",
+      "url": "https://webfileservice.nve.no/API/PublishedFiles/Download/f2000580-a151-44e1-a3ca-adb9c04e7b69/202609965/3451877",
+      "summary": "Energidepartementet tildelte prosjektområde 3 til Equinor og Vårgrønn og prosjektområde 2 til Harald Hårfagre AS, som eies av Deep Wind Offshore og EDF Renewables. Det tredje området ble ikke tildelt, fordi det bare kom to søkere. Begge har to år på seg til å søke konsesjon før det holdes en støttekonkurranse om hvem som faktisk får bygge.",
+      "why": "Bare ett av de to prosjektene får støtte. Følg begge, siden vinneren blir den store innkjøperen av norske leveranser utover 2030-tallet."
+    },
+    {
+      "id": "2026-01-26-nordsjoavtale",
+      "category": "politikk",
+      "date": "2026-01-26",
+      "importance": 2,
+      "source": "Dagbladet Børsen / Reuters",
+      "title": "Norge med i Nordsjø-avtale om 100 GW havvind",
+      "url": "https://borsen.dagbladet.no/nyheter/norge-inngar-gigantavtale/84144367",
+      "summary": "Ti land rundt Nordsjøen, blant dem Norge, Danmark og Storbritannia, ble enige om et mål om 100 GW havvind gjennom felles prosjekter. Avtalen ble undertegnet på et toppmøte i Hamburg og begrunnes med energisikkerhet. Til sammenligning hadde Norge rundt 40 GW installert kraftkapasitet totalt.",
+      "why": "Markedet er hele Nordsjøen, ikke bare Norge. Norsk kompetanse kan brukes på prosjekter i Danmark, Tyskland og Storbritannia."
+    },
+    {
+      "id": "2026-01-23-leverandorkraft",
+      "category": "marked",
+      "date": "2026-01-23",
+      "importance": 2,
+      "source": "Næringsforeningen i Stavanger-regionen",
+      "title": "Norsk leverandørindustri omsetter for 60 milliarder i havvind",
+      "url": "https://www.naeringsforeningen.no/nyheter/-samme-hva-som-skjer-i-norge-s%C3%A5-blir-dette-kjempestort-i-europa",
+      "summary": "Rapporten LeverandørKRAFT viser at norske leverandører omsatte for rundt 60 milliarder kroner innen havvind, en dobling siden 2021. Mye av omsetningen kommer fra prosjekter i utlandet. Bransjen beskriver tyngre tider med færre prosjekter, men venter stor vekst i Europa uansett hva som skjer i Norge.",
+      "why": "Jobbene finnes allerede, mest i leverandørselskaper som jobber mot utenlandske prosjekter. Du trenger ikke vente på norske parker for å komme inn."
+    },
+    {
+      "id": "2025-06-11-norconsult-snii",
+      "category": "kontrakter",
+      "date": "2025-06-11",
+      "importance": 1,
+      "project": "Sørlige Nordsjø II",
+      "source": "Norconsult",
+      "title": "Norconsult skal prosjektere landnettet for Sørlige Nordsjø II",
+      "url": "https://investor.norconsult.com/stock-exchange-and-press-releases/ventyr-chose-norconsult-one-step-closer-to-realising-soerlige-nordsjoe-ii-offshore-wind-project/",
+      "summary": "Ventyr valgte Norconsult til å designe og planlegge nettilknytningen på land (FEED). Norconsult har tidligere gjort miljøkonsekvensutredningen på land og nær land for prosjektet. Worley Rosenberg er valgt som foretrukket leverandør av den havbaserte transformatorstasjonen.",
+      "why": "Rådgivende ingeniørselskaper er en vanlig inngang til bransjen tidlig i prosjektene. Det gjelder særlig innen elkraft, nett og miljø."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Hywind Tampen",
+      "owner": "Equinor og partnere",
+      "capacity": "Flytende, forsyner olje- og gassfelt",
+      "stage": 6,
+      "next": "I drift siden 2023. Verdens største flytende havvindpark da den åpnet, og en referanse for Utsira Nord."
+    },
+    {
+      "name": "Sørlige Nordsjø II",
+      "owner": "Ventyr (JERA Nex bp, Ingka Investments)",
+      "capacity": "1,5 GW bunnfast",
+      "stage": 3,
+      "next": "Konsesjonssøknad innen 15. oktober 2027. Utreder ny ilandføring ved Lista."
+    },
+    {
+      "name": "Utsira Nord, område 3",
+      "owner": "Equinor og Vårgrønn",
+      "capacity": "Om lag 500 MW flytende",
+      "stage": 3,
+      "next": "Utredningsprogram fra NVE høsten 2026, deretter konsesjonssøknad og støttekonkurranse."
+    },
+    {
+      "name": "Utsira Nord, område 2",
+      "owner": "Harald Hårfagre (Deep Wind Offshore, EDF)",
+      "capacity": "Om lag 500 MW flytende",
+      "stage": 3,
+      "next": "Konkurrerer med område 3 om støtten. Bare ett av prosjektene får inntil 35 mrd. kr."
+    },
+    {
+      "name": "Nye havvindområder",
+      "owner": "Staten (NVE utreder 20 områder)",
+      "capacity": "Mål: 30 GW tildelt innen 2040",
+      "stage": 0,
+      "next": "Regjeringens plan for utlysninger ventes i løpet av 2026."
+    }
+  ],
+  "meta": {
+    "lastUpdated": "2026-10-10",
+    "milestones": [
+      {
+        "sort": "2026-10",
+        "when": "Oktober 2026",
+        "what": "NVEs scenariorapport for kraftmarkedet, med beregninger av havvindens rolle"
+      },
+      {
+        "sort": "2026-11",
+        "when": "Høsten 2026",
+        "what": "NVE fastsetter utredningsprogram for de to Utsira Nord-prosjektene"
+      },
+      {
+        "sort": "2026-12",
+        "when": "Innen utgangen av 2026",
+        "what": "Regjeringens plan for videre utlysninger av havvind"
+      },
+      {
+        "sort": "2027-10",
+        "when": "15. oktober 2027",
+        "what": "Frist for konsesjonssøknad for Sørlige Nordsjø II"
+      },
+      {
+        "sort": "2028-02",
+        "when": "Rundt februar 2028",
+        "what": "Frist for konsesjonssøknader i Utsira Nord, to år etter tildeling"
+      },
+      {
+        "sort": "2028-06",
+        "when": "2028–2029",
+        "what": "Støttekonkurranse i Utsira Nord avgjør hvem som bygger"
+      },
+      {
+        "sort": "2035-01",
+        "when": "Rundt 2035",
+        "what": "Planlagt drift for det første flytende prosjektet i Utsira Nord"
+      }
+    ]
+  }
+}

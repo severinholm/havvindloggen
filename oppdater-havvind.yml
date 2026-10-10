@@ -1,0 +1,55 @@
+name: Oppdater Havvindloggen
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"   # hver mandag kl. 05:00 UTC (07:00 norsk sommertid)
+  workflow_dispatch:       # gir deg en «Run workflow»-knapp under Actions
+
+permissions:
+  contents: write   # for å lagre oppdatert news.json
+  id-token: write   # for å hente identitetsbevis fra GitHub (ingen API-nøkkel)
+
+concurrency:
+  group: oppdater-havvind
+  cancel-in-progress: false
+
+jobs:
+  oppdater:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer Anthropic SDK
+        run: pip install --upgrade anthropic
+
+      - name: Hent identitetsbevis fra GitHub
+        run: |
+          curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+            | jq -r .value > /tmp/gha-jwt
+
+      - name: Spør Claude om nye saker
+        env:
+          ANTHROPIC_IDENTITY_TOKEN_FILE: /tmp/gha-jwt
+          ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+        run: python scripts/update_news.py
+
+      - name: Lagre endringer
+        run: |
+          if git diff --quiet news.json; then
+            echo "Ingen endringer."
+            exit 0
+          fi
+          git config user.name "havvind-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news.json
+          git commit -m "Ukentlig oppdatering $(date -u +%F)"
+          git push
