@@ -99,6 +99,11 @@ def parse_items(text: str) -> list:
     return json.loads(m.group(1)).get("news", [])
 
 
+def is_auth_failure(err: Exception) -> bool:
+    msg = str(err).lower()
+    return "authentication failed" in msg or "token exchange failed" in msg
+
+
 def clean(item: dict, today: dt.date):
     title = str(item.get("title", "")).strip()
     url = str(item.get("url", "")).strip()
@@ -137,7 +142,14 @@ def main() -> int:
     data = json.loads(NEWS_FILE.read_text(encoding="utf-8"))
     data.setdefault("news", [])
 
-    text = ask_claude(build_prompt(data, today))
+    try:
+        text = ask_claude(build_prompt(data, today))
+    except Exception as e:
+        if is_auth_failure(e):
+            print(f"Autentisering mot Anthropic feilet, hopper over oppdatering: {e}")
+            return 0
+        print(f"Klarte ikke å hente svar fra Claude: {e}")
+        return 1
     try:
         raw = parse_items(text)
     except (ValueError, json.JSONDecodeError) as e:
