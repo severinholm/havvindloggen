@@ -146,8 +146,8 @@ def main() -> int:
         text = ask_claude(build_prompt(data, today))
     except Exception as e:
         if is_auth_failure(e):
-            print(f"Autentisering mot Anthropic feilet, hopper over oppdatering: {e}")
-            return 0
+            print(f"Autentisering mot Anthropic feilet, ingen oppdatering: {e}")
+            return 1
         print(f"Klarte ikke å hente svar fra Claude: {e}")
         return 1
     try:
