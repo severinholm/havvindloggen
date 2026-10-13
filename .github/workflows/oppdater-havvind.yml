@@ -32,7 +32,14 @@ jobs:
           curl --fail-with-body -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
             | jq -re .value > /tmp/gha-jwt
-
+            
+      - name: Vis ID-ene som brukes
+        run: |
+          echo "Organization:    '${{ vars.ANTHROPIC_ORGANIZATION_ID }}'"
+          echo "Federation rule: '${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}'"
+          echo "Service account: '${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}'"
+          echo "Workspace:       '${{ vars.ANTHROPIC_WORKSPACE_ID }}'"
+          
       - name: Spør Claude om nye saker
         env:
           ANTHROPIC_IDENTITY_TOKEN_FILE: /tmp/gha-jwt
