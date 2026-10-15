@@ -1,6 +1,18 @@
 {
   "news": [
     {
+      "id": "2026-10-12-aasland-havvindplanen-kommer-forst-etter-nyttar",
+      "date": "2026-10-12",
+      "category": "politikk",
+      "importance": 3,
+      "title": "Aasland: Havvindplanen kommer først etter nyttår",
+      "summary": "Energiminister Terje Aasland (Ap) sier han venter at regjeringens nye plan for havvind kommer etter nyttår. Planen har vært utsatt flere ganger. Ifølge Montel, slik Radio Haugaland gjengir det, har arbeidet med kvalitetssikringen av Utsira Nord bidratt til forsinkelsen. Planen var tidligere ventet i løpet av 2026.",
+      "why": "Nye utlysninger og områder som kan gi flere jobber, skyves ut i tid. Du bør regne med at neste store bølge av norske havvindprosjekter kommer senere enn bransjen har håpet.",
+      "source": "Radio Haugaland (radioh.no)",
+      "url": "https://radioh.no/aasland-varsler-havvindplan-etter-nyttar/",
+      "project": "Nye havvindområder"
+    },
+    {
       "id": "2026-10-10-ap-frp-rosenberg",
       "category": "politikk",
       "date": "2026-10-10",
@@ -46,6 +58,18 @@
       "url": "https://www.regjeringen.no/contentassets/5bb53b34aa0b4e09b93cf8b782d661b5/oslo-economics-ringvirkningsanalyse-av-utsira-nord.pdf",
       "summary": "Oslo Economics har på oppdrag fra Energidepartementet anslått at prosjektet kan gi om lag 8,5 milliarder kroner i norsk verdiskaping og rundt 6000 årsverk. Høyre forventer at regjeringen og utbyggerne sikrer høy norsk andel i kontraktene.",
       "why": "Dette er det beste anslaget på hvor mange jobber det første flytende prosjektet kan skape. Rapporten viser også hvilke deler av verdikjeden jobbene havner i."
+    },
+    {
+      "id": "2026-10-07-utsira-kommune-far-engangsstotte-og-utkastet-til-s",
+      "date": "2026-10-07",
+      "category": "politikk",
+      "importance": 1,
+      "title": "Utsira kommune får engangsstøtte, og utkastet til støtteavtalen justeres",
+      "summary": "Statsbudsjettet for 2027 foreslår en engangsbevilgning på 3 millioner kroner til Utsira kommune, pluss en tilsagnsfullmakt på samme beløp. Kommunen er direkte berørt av utbyggingen. NRK skriver også at regjeringen har gjort to justeringer i utkastet til støtteavtale for Utsira Nord. Rapporten understreker at anslagene er usikre og at flytende havvind fortsatt er umoden teknologi.",
+      "why": "Saken viser at staten vil kompensere små vertskommuner. Samtidig er avtalevilkårene ikke endelige, og de avgjør hvor stor risiko utbyggerne tar og dermed hvor mye arbeid som kan komme.",
+      "source": "NRK Rogaland",
+      "url": "https://www.nrk.no/rogaland/regjeringa-gjer-endringar-i-stotteavtale-til-utsira-nord-1.18047835",
+      "project": "Utsira Nord, område 3"
     },
     {
       "id": "2026-08-21-snii-utsatt",
@@ -179,7 +203,7 @@
     }
   ],
   "meta": {
-    "lastUpdated": "2026-10-10",
+    "lastUpdated": "2026-10-15",
     "milestones": [
       {
         "sort": "2026-10",
