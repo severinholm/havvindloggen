@@ -1,6 +1,29 @@
 {
   "news": [
     {
+      "id": "2026-10-19-eu-gir-3-3-mrd-kr-til-norsk-havvindfabrikk-pa-stor",
+      "date": "2026-10-19",
+      "category": "selskaper",
+      "importance": 2,
+      "title": "EU gir 3,3 mrd. kr til norsk havvindfabrikk på Stord og to karbonfangstprosjekter",
+      "summary": "Aker Solutions, Aker BP og Sirona Technologies får til sammen nesten 3,3 mrd. kr fra EUs innovasjonsfond, ifølge Enova. Aker Solutions vil bruke sin del til en helautomatisert produksjonslinje for havvindkomponenter på Stord. De to andre pengene går til karbonfangst. Enova opplyser ikke hvordan støtten fordeles mellom selskapene.",
+      "why": "Dette er en av få konkrete industrisatsinger på havvind i Norge akkurat nå, og den kommer uavhengig av den norske støttedebatten. Stord er et sted å følge med på hvis du vil jobbe med produksjon og automatisering i havvindleverandørkjeden.",
+      "source": "Enova (pressemelding via NTB)",
+      "url": "https://kommunikasjon.ntb.no/pressemelding/19110879/33-milliarder-kroner-fra-eu-til-norske-havvind-og-karbonfangstprosjekter?lang=no"
+    },
+    {
+      "id": "2026-10-19-debatt-havner-og-kaiarealer-kan-bli-flaskehals-for",
+      "date": "2026-10-19",
+      "category": "marked",
+      "importance": 1,
+      "title": "Debatt: Havner og kaiarealer kan bli flaskehals for flytende havvind",
+      "summary": "Et debattinnlegg i Aftenbladet argumenterer for at logistikk og kaikapasitet må planlegges nå, før Utsira Nord og senere prosjekter skal bygges. Innlegget viser til en studie bestilt av Innovasjon Norge. Ifølge studien må landene rundt Nordsjøen nesten doble havnearealet for havvind innen 2030. Dette er et meningsinnlegg, ikke en nyhetssak.",
+      "why": "Sammenstilling og montering ved kai er en egen jobbkategori innen flytende havvind, bredere enn selve turbinene. Havne-, logistikk- og prosjektstyringskompetanse kan bli etterspurt når prosjektene nærmer seg.",
+      "source": "Aftenbladet (debatt)",
+      "url": "https://www.aftenbladet.no/meninger/debatt/i/eGkddR/flytende-havvind-bygges-ved-kaikanten",
+      "project": "Utsira Nord"
+    },
+    {
       "id": "2026-10-12-aasland-havvindplanen-kommer-forst-etter-nyttar",
       "date": "2026-10-12",
       "category": "politikk",
@@ -203,7 +226,7 @@
     }
   ],
   "meta": {
-    "lastUpdated": "2026-10-19",
+    "lastUpdated": "2026-10-26",
     "milestones": [
       {
         "sort": "2026-10",
