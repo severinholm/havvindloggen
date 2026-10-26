@@ -2,7 +2,7 @@ name: Oppdater Havvindloggen
 
 on:
   schedule:
-    - cron: "0 5 * * 1"   # hver mandag kl. 05:00 UTC (07:00 norsk sommertid)
+    - cron: "17 5 * * 1"   # hver mandag kl. 05:00 UTC (07:00 norsk sommertid)
   workflow_dispatch:       # gir deg en «Run workflow»-knapp under Actions
 
 permissions:
