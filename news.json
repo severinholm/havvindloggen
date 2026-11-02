@@ -1,6 +1,18 @@
 {
   "news": [
     {
+      "id": "2026-10-30-enova-gir-3-94-mrd-kr-til-to-flytende-havvindprosj",
+      "date": "2026-10-30",
+      "category": "politikk",
+      "importance": 3,
+      "title": "Enova gir 3,94 mrd. kr til to flytende havvindprosjekter ved Karmøy",
+      "summary": "Enova har valgt Fortius Offshore Wind, som er en del av Deep Wind Offshore, og Fram Wind Solutions som vinnere av konkurransen for småskala kommersiell flytende havvind. Fortius får 2 mrd. kr og Fram 1,94 mrd. kr. Til sammen skal de sette opp fire turbiner på 18,5 MW hver, om lag 74 MW, ved testsenteret METCentre utenfor Karmøy de neste fem årene. Støtten er betinget av at prosjektene gjennomføres.",
+      "why": "Dette er de første nye flytende havvindturbinene i Norge etter Hywind Tampen. De gir konkrete oppdrag innen fundamenter, forankring og installasjon, og gir norske leverandører erfaring før Utsira Nord. Norwegian Offshore Wind og METCentre har varslet leverandørarrangementer når innkjøpsbehovene blir klare, så det lønner seg å følge med.",
+      "source": "Ocean24",
+      "url": "https://www.ocean24.no/2026/10/30/fire-milliarder-til-to-flytende-havvind-anlegg/",
+      "project": "METCentre / flytende havvind (demo)"
+    },
+    {
       "id": "2026-10-19-eu-gir-3-3-mrd-kr-til-norsk-havvindfabrikk-pa-stor",
       "date": "2026-10-19",
       "category": "selskaper",
@@ -226,7 +238,7 @@
     }
   ],
   "meta": {
-    "lastUpdated": "2026-10-26",
+    "lastUpdated": "2026-11-02",
     "milestones": [
       {
         "sort": "2026-10",
