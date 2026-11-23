@@ -1,6 +1,17 @@
 {
   "news": [
     {
+      "id": "2026-11-20-havvind-er-storste-fornybare-leverandornaering-64-",
+      "date": "2026-11-20",
+      "category": "marked",
+      "importance": 2,
+      "title": "Havvind er største fornybare leverandørnæring: 64 mrd. kr i omsetning i 2025",
+      "summary": "Energidepartementet la fredag fram en Multiconsult-kartlegging av norsk leverandørindustri for fornybar energi i 2025. Havvindleverandørene omsatte for 64,1 mrd. kr og skapte 11,2 mrd. kr i verdiskaping. Sysselsettingen steg fra 7 100 til nesten 7 600 årsverk. Over 70 prosent av verdiskapingen kom fra eksportmarkedene.",
+      "why": "Norske havvindjobber finnes i dag mest hos leverandører som selger til utlandet, ikke gjennom bygging av parker i Norge. Hvis du vil inn i bransjen, bør du derfor se mot leverandørindustrien og eksportmarkedene, og ikke bare vente på Utsira Nord og Sørlige Nordsjø II.",
+      "source": "regjeringen.no (Energidepartementet)",
+      "url": "https://www.regjeringen.no/no/aktuelt/havvind-fortsatt-storst-blant-leverandornaringene-for-fornybar-energi/id3194208/"
+    },
+    {
       "id": "2026-10-30-enova-gir-3-94-mrd-kr-til-to-flytende-havvindprosj",
       "date": "2026-10-30",
       "category": "politikk",
@@ -238,7 +249,7 @@
     }
   ],
   "meta": {
-    "lastUpdated": "2026-11-02",
+    "lastUpdated": "2026-11-23",
     "milestones": [
       {
         "sort": "2026-10",
